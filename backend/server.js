@@ -1,16 +1,29 @@
 // Import required modules and packages
+const dotenv = require('dotenv');
+dotenv.config(); // Load environment variables from .env file
+
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const ShortUrl = require('./models/shortUrl'); // Assuming the model is defined in 'models/shortUrl.js'
+const DATABASE_URL = process.env.DATABASE_URL;
+
 var app = express();
 
 // Connect to MongoDB database
-mongoose.connect('mongodb://localhost/urlShortener', {
+mongoose.connect(`${DATABASE_URL}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
+mongoose.connection.on('connected',connected => {
+    console.log("Connection successfull");
+})
+mongoose.connection.on('error',err => {
+    console.log("Connection failed");
+})
 
 // Set the view engine to use EJS templates
+app.set('views', path.join(__dirname, '../frontend/views'));
 app.set('view engine', 'ejs');
 
 // Middleware to parse the request body
