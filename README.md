@@ -7,3 +7,5 @@ This project is a URL shortener built using Node.js, Express.js, and Bootstrap. 
 + Copy the shortened URL and share it with others.
 - Access the shortened URL to be redirected to the original long URL.
 * See number of clicks of particular URL
+
+Link : https://url-shortener-hb1s.onrender.com/
